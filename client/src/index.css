@@ -1,0 +1,276 @@
+/*
+ * DESIGN PHILOSOPHY: Engineering Precision (엔지니어링 정밀성)
+ * - Off-white background (#F8F9FA), Charcoal text (#1A1F2E)
+ * - Tech Blue (#1565C0) + Emerald Green (#00897B) accent colors
+ * - Hairline borders (1px) as core design language
+ * - Pretendard/Noto Sans KR for Korean, DM Sans for English headings
+ * - Asymmetric layouts, large typographic numbers, vertical labels
+ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Custom brand colors */
+  --color-brand-blue: #1565C0;
+  --color-brand-blue-light: #1976D2;
+  --color-brand-blue-dark: #0D47A1;
+  --color-brand-green: #00897B;
+  --color-brand-green-light: #26A69A;
+  --color-brand-green-dark: #00695C;
+  --color-charcoal: #1A1F2E;
+  --color-charcoal-light: #2D3444;
+  --color-off-white: #F8F9FA;
+  --color-light-gray: #F0F2F5;
+  --color-mid-gray: #E2E6EA;
+  --color-text-muted: #6B7280;
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: oklch(0.988 0.002 247.839);
+  --foreground: oklch(0.18 0.02 264.052);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 264.052);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.02 264.052);
+  --primary: oklch(0.42 0.18 264.052);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.95 0.005 247.839);
+  --secondary-foreground: oklch(0.25 0.02 264.052);
+  --muted: oklch(0.96 0.003 247.839);
+  --muted-foreground: oklch(0.52 0.015 264.052);
+  --accent: oklch(0.95 0.005 247.839);
+  --accent-foreground: oklch(0.18 0.02 264.052);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.9 0.005 247.839);
+  --input: oklch(0.9 0.005 247.839);
+  --ring: oklch(0.42 0.18 264.052);
+  --chart-1: oklch(0.42 0.18 264.052);
+  --chart-2: oklch(0.52 0.15 175.5);
+  --chart-3: oklch(0.62 0.12 175.5);
+  --chart-4: oklch(0.72 0.08 175.5);
+  --chart-5: oklch(0.82 0.05 175.5);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.18 0.02 264.052);
+  --sidebar-primary: oklch(0.42 0.18 264.052);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.95 0.005 247.839);
+  --sidebar-accent-foreground: oklch(0.18 0.02 264.052);
+  --sidebar-border: oklch(0.9 0.005 247.839);
+  --sidebar-ring: oklch(0.42 0.18 264.052);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Noto Sans KR', 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
+    letter-spacing: -0.02em;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* Hairline divider - core design element */
+  .hairline {
+    border-top: 1px solid oklch(0.88 0.005 247.839);
+  }
+
+  /* Vertical label - signature design element */
+  .vertical-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    letter-spacing: 0.15em;
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: oklch(0.52 0.015 264.052);
+  }
+
+  /* Tech number display */
+  .tech-number {
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+  }
+
+  /* Brand blue accent */
+  .accent-blue {
+    color: #1565C0;
+  }
+
+  /* Brand green accent */
+  .accent-green {
+    color: #00897B;
+  }
+
+  /* Hover line expand effect */
+  .hover-line {
+    position: relative;
+  }
+  .hover-line::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #1565C0;
+    transition: width 0.3s ease;
+  }
+  .hover-line:hover::after {
+    width: 100%;
+  }
+
+  /* Section fade-in animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  /* Count up number animation */
+  @keyframes countUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Table row hover */
+  .table-row-hover:hover {
+    background-color: oklch(0.96 0.003 247.839);
+  }
+
+  /* Nav link active state */
+  .nav-active {
+    color: #1565C0;
+    border-bottom: 1px solid #1565C0;
+  }
+
+  .field {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid #E2E6EA;
+    color: #1A1F2E;
+    font-size: 0.8125rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    border-radius: 2px;
+    outline: none;
+  }
+
+  .field:focus {
+    border-color: #1565C0;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.75 0.01 247.839);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.6 0.015 264.052);
+}
