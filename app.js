@@ -6,7 +6,7 @@ const app = document.querySelector('#app');
 
 const logo = `<img src="/assets/isang-eng-logo.png" alt="ISANG ENG 이상이엔지" class="logo">`;
 const esc = (v='') => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const nav = () => `<header><a href="#/">${logo}</a><nav><a href="#/">홈</a><a href="#/projects">시공사례</a><a href="#/contact">견적문의</a><a href="#/admin">관리자</a></nav></header>`;
+const nav = () => `<header><a href="/"><img src="/assets/isang-eng-logo.png" alt="ISANG ENG 이상이엔지" class="logo"></a><nav><a href="/">홈</a><a href="/about">회사 소개</a><a href="/business">사업 소개</a><a href="/projects">시공 사례</a><a href="/contact">문의하기</a><a class="admin-nav" href="/admin.html">관리자</a></nav></header>`;
 const toast = msg => { const el = document.createElement('div'); el.className='toast'; el.textContent=msg; document.body.appendChild(el); setTimeout(()=>el.remove(), 3200); };
 
 async function projects() {
@@ -14,7 +14,7 @@ async function projects() {
   if (error) throw error; return data || [];
 }
 
-function layout(content) { app.innerHTML = nav() + `<main>${content}</main><footer>© ${new Date().getFullYear()} ISANG ENGINEERING. All rights reserved.</footer>`; }
+function layout(content) { app.innerHTML = nav() + `<main>${content}</main><footer><div class="footer-inner"><div><img src="/assets/isang-eng-logo.png" alt="ISANG ENG 이상이엔지" class="footer-logo"><p>냉난방 공조와 크린룸을 위한<br>엔지니어링 파트너</p></div><div><span class="footer-label">NAVIGATION</span><a href="/">홈</a><a href="/about">회사 소개</a><a href="/business">사업 소개</a><a href="/projects">시공 사례</a><a href="/contact">문의하기</a></div><div><span class="footer-label">CONTACT</span><span>TEL<br>042-564-2223</span><span>EMAIL<br>isang@isang.co.kr</span><span>ADDRESS<br>대전광역시 서구 관저동<br>1969-10, 2F</span></div></div><div class="footer-bottom">© ${new Date().getFullYear()} ISANG ENG. All rights reserved.<span>HVAC &amp; CLEANROOM ENGINEERING</span></div></footer>`; }
 
 async function renderHome() {
   layout(`<section class="hero"><div><p class="eyebrow">HVAC · CLEANROOM · ENGINEERING</p><h1>정밀한 기술로<br><strong>더 나은 환경</strong>을 만듭니다.</h1><p class="lead">냉난방 공조와 크린룸 설계·시공 전문기업 이상이엔지입니다.</p><a class="button" href="#/contact">견적문의하기</a></div><div class="hero-card"><span>01</span><b>Precision<br>Engineering</b><small>설계부터 시공, 유지관리까지</small></div></section><section class="section"><p class="eyebrow">WHAT WE DO</p><h2>공간의 기준을 설계합니다</h2><div class="cards"><article><b>HVAC</b><p>쾌적하고 안정적인 냉난방 공조 시스템</p></article><article><b>CLEANROOM</b><p>산업별 요구조건에 맞춘 크린룸 엔지니어링</p></article><article><b>PROJECT</b><p>현장 경험과 데이터로 완성하는 시공</p></article></div></section>`);
