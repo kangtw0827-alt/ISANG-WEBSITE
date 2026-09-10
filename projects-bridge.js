@@ -27,4 +27,9 @@
   };
   new MutationObserver(clean).observe(document.documentElement, { childList: true, subtree: true });
   setTimeout(clean, 300);
+  if (location.pathname === '/business') {
+    const script = document.createElement('script');
+    script.src = `/business-bridge.js?v=${Date.now()}`;
+    document.head.appendChild(script);
+  }
 })();
