@@ -2,9 +2,7 @@
   const apply = () => {
     const hero = Array.from(document.querySelectorAll('section')).find(s => s.className.includes('h-screen') && s.className.includes('overflow-hidden'));
     if (hero) {
-      hero.style.backgroundImage = "url('/assets/ai-cleanroom-hero.jpg')";
-      hero.style.backgroundSize = 'cover';
-      hero.style.backgroundPosition = 'center';
+      hero.style.backgroundImage = 'none';
       if (!hero.querySelector('video.isang-hero-video')) {
         const video = document.createElement('video');
         video.className = 'isang-hero-video';
@@ -29,4 +27,10 @@
   observer.observe(document.documentElement, {childList:true, subtree:true});
   setTimeout(apply, 600);
   setTimeout(apply, 1800);
+  if ((location.pathname === '/' || location.pathname === '/index.html') && !document.querySelector('script[data-home-business]')) {
+    const script = document.createElement('script');
+    script.dataset.homeBusiness = 'true';
+    script.src = `/home-business-bridge.js?v=${Date.now()}`;
+    document.head.appendChild(script);
+  }
 })();
