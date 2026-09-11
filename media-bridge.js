@@ -2,7 +2,7 @@
   const apply = () => {
     const hero = Array.from(document.querySelectorAll('section')).find(s => s.className.includes('h-screen') && s.className.includes('overflow-hidden'));
     if (hero) {
-      hero.style.backgroundImage = 'none';
+      hero.style.setProperty('background-image', 'none', 'important');
       if (!hero.querySelector('video.isang-hero-video')) {
         const video = document.createElement('video');
         video.className = 'isang-hero-video';
