@@ -8,7 +8,7 @@
         video.className = 'isang-hero-video';
         video.autoplay = true; video.loop = true; video.muted = true; video.playsInline = true;
         video.setAttribute('aria-hidden', 'true');
-        video.src = '/assets/KakaoTalk_20260911_101857131.mp4';
+        video.src = '/assets/hero-cleanroom-no-logo.mp4';
         Object.assign(video.style, {position:'absolute', inset:'0', width:'100%', height:'100%', objectFit:'cover', zIndex:'0', opacity:'0.72'});
         hero.insertBefore(video, hero.firstChild);
         const overlay = document.createElement('div');
