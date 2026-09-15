@@ -3,6 +3,19 @@
     const hero = Array.from(document.querySelectorAll('section')).find(s => s.className.includes('h-screen') && s.className.includes('overflow-hidden'));
     if (hero) {
       hero.style.setProperty('background-image', 'none', 'important');
+      hero.style.setProperty('height', '100svh', 'important');
+      hero.style.setProperty('min-height', '100svh', 'important');
+      hero.style.setProperty('max-height', 'none', 'important');
+      hero.style.setProperty('align-items', 'center', 'important');
+      if (!hero.querySelector('.hero-business-buttons')) {
+        const wrap = document.createElement('div');
+        wrap.className = 'hero-business-buttons';
+        wrap.innerHTML = `<a href="/business#cleanroom"><span class="hero-business-icon">▦</span><b>ICR</b><small>산업·바이오 클린룸</small><em>→</em></a><a href="/business#bcr"><span class="hero-business-icon">▤</span><b>BCR</b><small>바이오·제약 클린룸</small><em>→</em></a><a href="/business#dryroom"><span class="hero-business-icon">◌</span><b>DRY ROOM</b><small>초저습 드라이룸</small><em>→</em></a><a href="/business#cdu"><span class="hero-business-icon">▥</span><b>DATA CENTER</b><small>데이터센터 액체냉각</small><em>→</em></a>`;
+        const style = document.createElement('style');
+        style.textContent = `.hero-business-buttons{position:absolute;z-index:3;right:5vw;top:50%;transform:translateY(-38%);display:grid;grid-template-columns:repeat(4,minmax(118px,1fr));gap:14px;width:min(53vw,690px)}.hero-business-buttons a{min-height:190px;padding:26px 18px 18px;border:1px solid rgba(255,255,255,.42);border-radius:11px;background:rgba(26,58,91,.3);backdrop-filter:blur(5px);color:#fff;text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:.25s}.hero-business-buttons a:hover{background:rgba(18,116,207,.7);transform:translateY(-7px);border-color:#fff}.hero-business-icon{font-size:34px;line-height:1;margin-bottom:20px;color:#d9efff}.hero-business-buttons b{font-size:14px;letter-spacing:.02em}.hero-business-buttons small{font-size:10px;margin-top:9px;color:rgba(255,255,255,.8);text-align:center;line-height:1.35}.hero-business-buttons em{font-style:normal;font-size:20px;margin-top:14px;color:#d7edff}@media(max-width:1050px){.hero-business-buttons{right:3vw;width:52vw;gap:8px}.hero-business-buttons a{min-height:155px;padding:18px 8px}.hero-business-icon{font-size:27px;margin-bottom:13px}.hero-business-buttons small{font-size:9px}}@media(max-width:720px){.hero-business-buttons{top:auto;bottom:35px;left:18px;right:18px;transform:none;width:auto;grid-template-columns:repeat(2,1fr);gap:8px}.hero-business-buttons a{min-height:112px;padding:12px 8px}.hero-business-icon{font-size:23px;margin-bottom:8px}.hero-business-buttons b{font-size:12px}.hero-business-buttons small{font-size:9px;margin-top:4px}.hero-business-buttons em{font-size:15px;margin-top:5px}}`;
+        document.head.appendChild(style);
+        hero.appendChild(wrap);
+      }
       if (!hero.querySelector('video.isang-hero-video')) {
         const video = document.createElement('video');
         video.className = 'isang-hero-video';
