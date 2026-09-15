@@ -45,11 +45,11 @@
           buttons.style.setProperty('width', 'auto', 'important');
           buttons.style.setProperty('transform', 'none', 'important');
         } else {
-          buttons.style.setProperty('top', '58%', 'important');
+          buttons.style.setProperty('top', '52%', 'important');
           buttons.style.setProperty('right', '5vw', 'important');
           buttons.style.setProperty('bottom', 'auto', 'important');
           buttons.style.setProperty('left', 'auto', 'important');
-          buttons.style.setProperty('width', 'min(53vw, 690px)', 'important');
+          buttons.style.setProperty('width', 'min(50vw, 690px)', 'important');
           buttons.style.setProperty('transform', 'translateY(-50%)', 'important');
         }
       }
