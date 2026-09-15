@@ -68,14 +68,14 @@
         Array.from(hero.children).forEach(child => { if (child !== video && child !== overlay) { child.style.position='relative'; child.style.zIndex='2'; } });
       }
       const heroVideo = hero.querySelector('video.isang-hero-video');
-      if (heroVideo) heroVideo.src = '/assets/hero-cleanroom-no-logo.mp4';
+      if (heroVideo && !heroVideo.src.endsWith('/assets/hero-cleanroom-no-logo.mp4')) heroVideo.src = '/assets/hero-cleanroom-no-logo.mp4';
       const heroOverlay = hero.querySelector('.isang-hero-overlay');
       if (heroOverlay) heroOverlay.style.setProperty('background', 'linear-gradient(90deg, rgba(8,36,59,.60) 0%, rgba(8,36,59,.28) 48%, rgba(8,36,59,.08) 100%)', 'important');
       hero.style.setProperty('height', '56svh', 'important');
       hero.style.setProperty('min-height', '500px', 'important');
       hero.style.setProperty('max-height', '680px', 'important');
       const heroTitle = hero.querySelector('h1');
-      if (heroTitle) heroTitle.innerHTML = 'Precision Begins<br>with <span style="color:#43a9e9">Environment.</span>';
+      if (heroTitle && !(heroTitle.textContent || '').includes('Precision Begins')) heroTitle.innerHTML = 'Precision Begins<br>with <span style="color:#43a9e9">Environment.</span>';
       const heroEyebrow = Array.from(hero.querySelectorAll('*')).find(el => (el.textContent || '').trim() === 'Since 2022');
       if (heroEyebrow) heroEyebrow.textContent = 'ENGINEERED FOR CLEAN ENVIRONMENTS';
       if (window.innerWidth <= 720) {
