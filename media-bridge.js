@@ -76,7 +76,7 @@
     const ctaSection = ctaHeading?.closest('section');
     if (ctaSection) ctaSection.style.setProperty('display', 'none', 'important');
     if (hero && !document.querySelector('.isang-about-home')) {
-      const oldAbout = Array.from(document.querySelectorAll('section')).find(s => /About Us/.test(s.innerText || '') && /클린룸 전문/.test(s.innerText || ''));
+      const oldAbout = Array.from(document.querySelectorAll('section')).find(s => /ABOUT US/i.test(s.innerText || '') && /클린룸 전문/.test(s.innerText || ''));
       if (oldAbout) oldAbout.style.setProperty('display', 'none', 'important');
       const about = document.createElement('section');
       about.className = 'isang-about-home';
@@ -86,6 +86,14 @@
       style.textContent = `.isang-about-home{background:#fff;border-bottom:1px solid #e8edf1;color:#20384e}.isang-about-home-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1.16fr;min-height:650px}.isang-about-visual{position:relative;min-height:650px;overflow:visible}.isang-about-visual img{width:100%;height:100%;min-height:650px;display:block;object-fit:cover;filter:saturate(.9) contrast(1.05)}.isang-about-wash{position:absolute;inset:0;background:rgba(255,199,0,.72);mix-blend-mode:screen;pointer-events:none}.isang-about-years{position:absolute;right:-88px;bottom:180px;color:#143b59;display:flex;flex-direction:column;line-height:.84;z-index:2}.isang-about-years strong{font-size:106px;letter-spacing:-.1em;font-weight:800}.isang-about-years b{font-size:45px;letter-spacing:.02em}.isang-about-years small{font-size:13px;letter-spacing:.08em;margin-top:14px}.isang-about-copy{padding:58px 50px 50px 92px;position:relative}.isang-about-eyebrow{display:block;color:#8495a1;font-size:14px;margin-bottom:42px}.isang-about-copy h2{font-size:34px;line-height:1.3;letter-spacing:-.07em;margin:0 0 42px;color:#263e53}.isang-about-copy h3{font-size:20px;line-height:1.65;font-weight:500;letter-spacing:-.055em;margin:0 0 34px}.isang-about-copy>p{font-size:13px;line-height:1.9;color:#7a8790;letter-spacing:-.03em;margin:0 0 25px}.isang-about-contact{font-size:12px!important;line-height:1.8!important}.isang-about-more{display:inline-flex;align-items:center;gap:22px;border-bottom:1px solid #20384e;color:#20384e;text-decoration:none;font-size:13px;padding:0 0 10px;margin-top:5px}.isang-about-more span{font-size:19px}.isang-about-features{display:grid;grid-template-columns:1fr 1fr;gap:52px;margin-top:75px}.isang-about-features div{display:flex;flex-direction:column}.isang-about-features strong{font-size:45px;font-weight:400;line-height:1;margin-bottom:28px}.isang-about-features b{font-size:15px;font-weight:500;margin-bottom:20px}.isang-about-features p{font-size:12px;line-height:1.75;color:#89949c;margin:0}@media(max-width:900px){.isang-about-home-inner{grid-template-columns:1fr;max-width:680px}.isang-about-visual,.isang-about-visual img{min-height:440px;height:440px}.isang-about-years{right:24px;bottom:55px}.isang-about-years strong{font-size:78px}.isang-about-years b{font-size:34px}.isang-about-copy{padding:48px 28px 58px}.isang-about-copy h2{font-size:29px;margin-bottom:32px}.isang-about-features{margin-top:55px;gap:25px}}@media(max-width:520px){.isang-about-visual,.isang-about-visual img{min-height:330px;height:330px}.isang-about-years{right:18px;bottom:28px}.isang-about-years strong{font-size:62px}.isang-about-years b{font-size:27px}.isang-about-years small{font-size:10px;margin-top:9px}.isang-about-copy h2{font-size:25px}.isang-about-copy h3{font-size:17px}.isang-about-features{gap:18px}.isang-about-features strong{font-size:36px}}`;
       document.head.appendChild(style);
       hero.parentNode.insertBefore(about, hero.nextSibling);
+    }
+    const homeAbout = document.querySelector('.isang-about-home');
+    if (homeAbout) homeAbout.style.setProperty('display', 'block', 'important');
+    const duplicateAbout = Array.from(document.querySelectorAll('section')).find(s => s !== homeAbout && /ABOUT US/i.test(s.innerText || '') && /클린룸 전문/.test(s.innerText || ''));
+    if (duplicateAbout) duplicateAbout.style.setProperty('display', 'none', 'important');
+    if (location.pathname === '/' || location.pathname === '/index.html') {
+      const stats = Array.from(document.querySelectorAll('section')).find(s => /설립 연도/.test(s.innerText || '') && /핵심 사업 분야/.test(s.innerText || ''));
+      if (stats) stats.style.setProperty('display', 'none', 'important');
     }
     if (location.pathname === '/' || location.pathname === '/index.html') {
       const heroSection = Array.from(document.querySelectorAll('section')).find(s => s.className.includes('h-screen') && s.className.includes('overflow-hidden'));
