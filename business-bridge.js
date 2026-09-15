@@ -14,5 +14,6 @@
   const selectHash=()=>{const k=location.hash.replace('#','').split('?')[0]||'cleanroom'; if(data[k]) render(k);};
   setTimeout(selectHash, 500);
   setTimeout(selectHash, 1200);
+  setTimeout(()=>{const k=location.hash.replace('#','').split('?')[0]; const b=document.querySelector(`[data-tab="${k}"]`); if(b) b.click();}, 1800);
   window.addEventListener('hashchange', selectHash);
 })();
