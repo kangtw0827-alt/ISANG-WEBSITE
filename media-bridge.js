@@ -72,6 +72,11 @@
       img.src = '/assets/ai-cleanroom-about.jpg';
       img.removeAttribute('srcset');
     });
+    if (location.pathname === '/' || location.pathname === '/index.html') {
+      const heroSection = Array.from(document.querySelectorAll('section')).find(s => s.className.includes('h-screen') && s.className.includes('overflow-hidden'));
+      const statsSection = heroSection?.nextElementSibling;
+      if (statsSection) statsSection.style.setProperty('display', 'none', 'important');
+    }
   };
   const observer = new MutationObserver(apply);
   observer.observe(document.documentElement, {childList:true, subtree:true});
