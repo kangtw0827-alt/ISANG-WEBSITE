@@ -15,6 +15,14 @@
         heroContent.style.setProperty('max-width', '1280px', 'important');
         heroContent.style.setProperty('margin', '0 auto', 'important');
         heroContent.style.setProperty('padding-bottom', '0', 'important');
+        heroContent.style.setProperty('padding-left', '8vw', 'important');
+        heroContent.style.setProperty('padding-right', '2vw', 'important');
+        heroContent.style.setProperty('transform', 'translateY(7%)', 'important');
+        if (window.innerWidth <= 720) {
+          heroContent.style.setProperty('padding-left', '24px', 'important');
+          heroContent.style.setProperty('padding-right', '24px', 'important');
+          heroContent.style.setProperty('transform', 'translateY(-8%)', 'important');
+        }
       }
       if (!hero.querySelector('.hero-business-buttons')) {
         const wrap = document.createElement('div');
@@ -37,7 +45,7 @@
           buttons.style.setProperty('width', 'auto', 'important');
           buttons.style.setProperty('transform', 'none', 'important');
         } else {
-          buttons.style.setProperty('top', '50%', 'important');
+          buttons.style.setProperty('top', '58%', 'important');
           buttons.style.setProperty('right', '5vw', 'important');
           buttons.style.setProperty('bottom', 'auto', 'important');
           buttons.style.setProperty('left', 'auto', 'important');
