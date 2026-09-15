@@ -76,7 +76,7 @@
     const ctaSection = ctaHeading?.closest('section');
     if (ctaSection) ctaSection.style.setProperty('display', 'none', 'important');
     if (hero && !document.querySelector('.isang-about-home')) {
-      const oldAbout = Array.from(document.querySelectorAll('section')).find(s => /ABOUT US/i.test(s.innerText || '') && /클린룸 전문/.test(s.innerText || ''));
+      const oldAbout = Array.from(document.querySelectorAll('section:not(.isang-about-home)')).find(s => /ABOUT US/i.test(s.innerText || '') && /클린룸 전문/.test(s.innerText || ''));
       if (oldAbout) oldAbout.style.setProperty('display', 'none', 'important');
       const about = document.createElement('section');
       about.className = 'isang-about-home';
@@ -88,8 +88,13 @@
       hero.parentNode.insertBefore(about, hero.nextSibling);
     }
     const homeAbout = document.querySelector('.isang-about-home');
-    if (homeAbout) homeAbout.style.setProperty('display', 'block', 'important');
-    const duplicateAbout = Array.from(document.querySelectorAll('section')).find(s => s !== homeAbout && /ABOUT US/i.test(s.innerText || '') && /클린룸 전문/.test(s.innerText || ''));
+    if (homeAbout) {
+      homeAbout.hidden = false;
+      homeAbout.removeAttribute('hidden');
+      homeAbout.style.removeProperty('display');
+      homeAbout.style.setProperty('display', 'block', 'important');
+    }
+    const duplicateAbout = Array.from(document.querySelectorAll('section:not(.isang-about-home)')).find(s => /ABOUT US/i.test(s.innerText || '') && /클린룸 전문/.test(s.innerText || ''));
     if (duplicateAbout) duplicateAbout.style.setProperty('display', 'none', 'important');
     if (location.pathname === '/' || location.pathname === '/index.html') {
       const stats = Array.from(document.querySelectorAll('section')).find(s => /설립 연도/.test(s.innerText || '') && /핵심 사업 분야/.test(s.innerText || ''));
@@ -105,6 +110,13 @@
   observer.observe(document.documentElement, {childList:true, subtree:true});
   setTimeout(apply, 600);
   setTimeout(apply, 1800);
+  setTimeout(() => {
+    const about = document.querySelector('.isang-about-home');
+    if (about) {
+      about.hidden = false;
+      about.style.setProperty('display', 'block', 'important');
+    }
+  }, 3000);
   if ((location.pathname === '/' || location.pathname === '/index.html') && !document.querySelector('script[data-home-business]')) {
     const script = document.createElement('script');
     script.dataset.homeBusiness = 'true';
