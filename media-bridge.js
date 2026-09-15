@@ -58,29 +58,14 @@
         video.className = 'isang-hero-video';
         video.autoplay = true; video.loop = true; video.muted = true; video.playsInline = true;
         video.setAttribute('aria-hidden', 'true');
-        video.src = '/assets/hero-cleanroom-no-logo.mp4';
+        video.src = '/assets/KakaoTalk_20260911_101857131.mp4';
         Object.assign(video.style, {position:'absolute', inset:'0', width:'100%', height:'100%', objectFit:'cover', zIndex:'0', opacity:'0.72'});
         hero.insertBefore(video, hero.firstChild);
         const overlay = document.createElement('div');
         overlay.className = 'isang-hero-overlay';
-        Object.assign(overlay.style, {position:'absolute', inset:'0', zIndex:'1', background:'linear-gradient(90deg, rgba(8,36,59,.60) 0%, rgba(8,36,59,.28) 48%, rgba(8,36,59,.08) 100%)', pointerEvents:'none'});
+        Object.assign(overlay.style, {position:'absolute', inset:'0', zIndex:'1', background:'linear-gradient(90deg, rgba(7,18,34,.82) 0%, rgba(7,18,34,.48) 48%, rgba(7,18,34,.15) 100%)', pointerEvents:'none'});
         hero.insertBefore(overlay, video.nextSibling);
         Array.from(hero.children).forEach(child => { if (child !== video && child !== overlay) { child.style.position='relative'; child.style.zIndex='2'; } });
-      }
-      const heroVideo = hero.querySelector('video.isang-hero-video');
-      if (heroVideo) heroVideo.src = '/assets/hero-cleanroom-no-logo.mp4';
-      const heroOverlay = hero.querySelector('.isang-hero-overlay');
-      if (heroOverlay) heroOverlay.style.setProperty('background', 'linear-gradient(90deg, rgba(8,36,59,.60) 0%, rgba(8,36,59,.28) 48%, rgba(8,36,59,.08) 100%)', 'important');
-      hero.style.setProperty('height', '56svh', 'important');
-      hero.style.setProperty('min-height', '500px', 'important');
-      hero.style.setProperty('max-height', '680px', 'important');
-      const heroTitle = hero.querySelector('h1');
-      if (heroTitle) heroTitle.innerHTML = 'Precision Begins<br>with <span style="color:#43a9e9">Environment.</span>';
-      const heroEyebrow = Array.from(hero.querySelectorAll('*')).find(el => (el.textContent || '').trim() === 'Since 2022');
-      if (heroEyebrow) heroEyebrow.textContent = 'ENGINEERED FOR CLEAN ENVIRONMENTS';
-      if (window.innerWidth <= 720) {
-        hero.style.setProperty('height', '72svh', 'important');
-        hero.style.setProperty('min-height', '560px', 'important');
       }
     }
     document.querySelectorAll('img[alt="클린룸 시공 현장"]').forEach(img => {
@@ -90,15 +75,6 @@
     const ctaHeading = Array.from(document.querySelectorAll('h1,h2,h3')).find(el => (el.textContent || '').includes('프로젝트를 시작하세요'));
     const ctaSection = ctaHeading?.closest('section');
     if (ctaSection) ctaSection.style.setProperty('display', 'none', 'important');
-    if (hero && !document.querySelector('.isang-business-area')) {
-      const area = document.createElement('section');
-      area.className = 'isang-business-area';
-      area.innerHTML = `<div class="isang-business-area-inner"><div class="isang-business-intro"><small>BUSINESS AREA</small><h2>다양한 산업의<br>클린룸 환경을 설계합니다.</h2><p>이상이엔지는 산업별 요구 조건에 맞춘<br>정밀한 공조·클린룸 엔지니어링을 제공합니다.</p><a href="/business">전체 사업영역 보기 →</a></div><div class="isang-business-cards"><a href="/business#cleanroom"><img src="/assets/ai-cleanroom-about.jpg" alt="ICR 산업·바이오 클린룸"><span>01</span><b>ICR</b><small>Integrated Clean Room</small><em>산업·바이오 클린룸</em><i>→</i></a><a href="/business#bcr"><img src="/assets/ai-business-engineering.jpg" alt="BCR 바이오·제약 클린룸"><span>02</span><b>BCR</b><small>Bio Clean Room</small><em>바이오·제약 클린룸</em><i>→</i></a><a href="/business#dryroom"><img src="/assets/ai-project-installation.jpg" alt="DRY ROOM 초저습 드라이룸"><span>03</span><b>DRY ROOM</b><small>Ultra Low Humidity</small><em>초저습 드라이룸</em><i>→</i></a><a href="/business#cdu"><img src="/assets/ai-cleanroom-hero.jpg" alt="DATA CENTER 데이터센터"><span>04</span><b>DATA CENTER</b><small>Liquid Cooling</small><em>데이터센터 액체냉각</em><i>→</i></a></div></div>`;
-      const style = document.createElement('style');
-      style.textContent = `.isang-business-area{background:#f5f9fc;border-bottom:1px solid #dfe9f0;padding:42px 6vw 54px;color:#183c59}.isang-business-area-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:220px 1fr;gap:42px;align-items:stretch}.isang-business-intro{padding:12px 0}.isang-business-intro small{font:700 9px/1.2 'DM Mono',monospace;letter-spacing:.12em;color:#2584bd}.isang-business-intro h2{font-size:20px;line-height:1.4;letter-spacing:-.07em;margin:12px 0 15px}.isang-business-intro p{font-size:10px;line-height:1.75;color:#758898;margin:0 0 18px}.isang-business-intro a{font-size:10px;font-weight:700;color:#1676b7;text-decoration:none}.isang-business-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.isang-business-cards a{min-width:0;background:#fff;border:1px solid #dfe8ef;border-radius:7px;overflow:hidden;text-decoration:none;color:#1b405d;box-shadow:0 8px 20px rgba(38,82,115,.06);transition:transform .2s,box-shadow .2s}.isang-business-cards a:hover{transform:translateY(-5px);box-shadow:0 14px 24px rgba(38,82,115,.15)}.isang-business-cards img{display:block;width:100%;height:112px;object-fit:cover;filter:saturate(.75) brightness(1.08)}.isang-business-cards span{display:block;font:9px 'DM Mono',monospace;color:#7191a6;margin:13px 13px 3px}.isang-business-cards b{display:block;font-size:15px;margin:0 13px 3px}.isang-business-cards small{display:block;font-size:8px;color:#8297a6;margin:0 13px 7px}.isang-business-cards em{display:block;font-style:normal;font-size:9px;color:#567286;margin:0 13px 15px}.isang-business-cards i{display:grid;place-items:center;width:22px;height:22px;border:1px solid #dce6ed;border-radius:50%;font-style:normal;font-size:12px;color:#5d88a2;margin:0 13px 13px}@media(max-width:800px){.isang-business-area{padding:36px 20px 42px}.isang-business-area-inner{display:block}.isang-business-intro{padding:0;margin-bottom:23px}.isang-business-intro h2{font-size:23px}.isang-business-cards{grid-template-columns:repeat(2,1fr);gap:9px}.isang-business-cards img{height:100px}.isang-business-cards b{font-size:14px}}@media(max-width:430px){.isang-business-cards{grid-template-columns:1fr 1fr}.isang-business-cards img{height:82px}.isang-business-cards em{font-size:8px}}`;
-      document.head.appendChild(style);
-      hero.parentNode.insertBefore(area, hero.nextSibling);
-    }
     if (location.pathname === '/' || location.pathname === '/index.html') {
       const heroSection = Array.from(document.querySelectorAll('section')).find(s => s.className.includes('h-screen') && s.className.includes('overflow-hidden'));
       const statsSection = heroSection?.nextElementSibling;
