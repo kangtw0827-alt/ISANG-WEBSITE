@@ -72,6 +72,9 @@
       img.src = '/assets/ai-cleanroom-about.jpg';
       img.removeAttribute('srcset');
     });
+    const ctaHeading = Array.from(document.querySelectorAll('h1,h2,h3')).find(el => (el.textContent || '').includes('프로젝트를 시작하세요'));
+    const ctaSection = ctaHeading?.closest('section');
+    if (ctaSection) ctaSection.style.setProperty('display', 'none', 'important');
     if (location.pathname === '/' || location.pathname === '/index.html') {
       const heroSection = Array.from(document.querySelectorAll('section')).find(s => s.className.includes('h-screen') && s.className.includes('overflow-hidden'));
       const statsSection = heroSection?.nextElementSibling;
