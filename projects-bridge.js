@@ -34,10 +34,9 @@
     }
     document.querySelectorAll('body *').forEach(el => { const label = (el.textContent || '').trim(); if (label === '등급') el.textContent = '기간'; if (label.startsWith('면적')) el.textContent = '공정'; });
     const table = document.querySelector('.min-w-\\[780px\\]');
-    if (table && !table.dataset.processFirst) {
+    if (table) {
       const rows = [table.firstElementChild, ...table.querySelectorAll('button.w-full')].filter(Boolean);
-      rows.forEach(row => { const cells = [...row.children]; if (cells.length >= 6) row.append(cells[5], cells[4]); row.style.gridTemplateColumns='72px minmax(220px,1fr) 125px 130px 100px 160px'; });
-      table.dataset.processFirst = 'true';
+      rows.forEach(row => { row.style.gridTemplateColumns='72px minmax(220px,1fr) 125px 130px 100px 160px'; if (row.dataset.processFirst) return; const cells = [...row.children]; if (cells.length >= 6) row.append(cells[5], cells[4]); row.dataset.processFirst='true'; });
     }
     document.querySelectorAll('.inline-block.text-\\[11px\\].bg-\\[\\#EEF2FF\\]').forEach(el => { el.classList.remove('bg-[#EEF2FF]','text-[#1565C0]','px-2','py-0.5'); el.style.color='inherit'; el.style.background='transparent'; el.style.padding='0'; });
   };
