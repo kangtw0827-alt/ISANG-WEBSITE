@@ -7,7 +7,7 @@
     if (url.includes('/api/trpc') && url.includes('projects.list')) {
       const response = await originalFetch(`${SUPABASE_URL}/rest/v1/projects?select=*&order=created_at.desc&limit=100`, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } });
       const data = await response.json();
-      const mapped = (data || []).map(row => ({ ...row, grade: row.duration || row.grade || '', area: row.process_type || row.area || '', project_type: row.sector || row.project_type || '' }));
+      const mapped = (data || []).map(row => ({ ...row, grade: row.duration || row.grade || '', area: row.process_type === '턴키' ? 'Turnkey' : (row.process_type || row.area || ''), project_type: row.sector || row.project_type || '' }));
       return new Response(JSON.stringify({ result: { data: { json: mapped } } }), { status: response.ok ? 200 : response.status, headers: { 'Content-Type': 'application/json' } });
     }
     return originalFetch(input, init);
@@ -33,6 +33,13 @@
       const style=document.createElement('style'); style.textContent='.project-sector-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 20px}.project-sector-buttons button{border:1px solid #dce3eb;background:#fff;color:#526071;border-radius:999px;padding:9px 14px;font:600 11px inherit;cursor:pointer}.project-sector-buttons button.active,.project-sector-buttons button:hover{background:#1670c5;border-color:#1670c5;color:#fff}.project-sector-buttons button:first-child{background:#1670c5;color:#fff}'; document.head.appendChild(style);
     }
     document.querySelectorAll('body *').forEach(el => { const label = (el.textContent || '').trim(); if (label === '등급') el.textContent = '기간'; if (label.startsWith('면적')) el.textContent = '공정'; });
+    const table = document.querySelector('.min-w-\\[780px\\]');
+    if (table && !table.dataset.processFirst) {
+      const rows = [table.firstElementChild, ...table.querySelectorAll('button.w-full')].filter(Boolean);
+      rows.forEach(row => { const cells = [...row.children]; if (cells.length >= 6) row.append(cells[5], cells[4]); });
+      table.dataset.processFirst = 'true';
+    }
+    document.querySelectorAll('.inline-block.text-\\[11px\\].bg-\\[\\#EEF2FF\\]').forEach(el => { el.classList.remove('bg-[#EEF2FF]','text-[#1565C0]','px-2','py-0.5'); el.style.color='inherit'; el.style.background='transparent'; el.style.padding='0'; });
   };
   new MutationObserver(clean).observe(document.documentElement, { childList:true, subtree:true });
   setTimeout(clean, 300); setTimeout(clean, 1000); setTimeout(clean, 2200);
