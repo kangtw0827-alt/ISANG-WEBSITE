@@ -41,8 +41,8 @@
 
 (() => {
   const path = location.pathname.replace(/\/$/,'') || '/';
-  const assets = {about:'/assets/ai-cleanroom-about.jpg',business:'/assets/ai-business-engineering.jpg',projects:'/assets/ai-project-installation.jpg',contact:'/assets/ai-contact-consultation.jpg'};
-  const key = path.slice(1); if (!assets[key]) return;
+  const assets = {about:'/assets/ai-cleanroom-about.jpg',business:'/assets/ai-business-engineering.jpg',contact:'/assets/ai-contact-consultation.jpg'};
+  const key = path.slice(1); if (!assets[key] || key === 'projects') return;
   const add = () => {
     if (document.querySelector('.page-media-visual')) return;
     const img = document.createElement('img'); img.className='page-media-visual'; img.src=assets[key]; img.alt='이상이엔지 엔지니어링 현장';
