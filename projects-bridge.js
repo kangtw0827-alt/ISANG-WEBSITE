@@ -50,7 +50,7 @@
       table.querySelectorAll('button.w-full').forEach(row => {
         if (row.dataset.workStyled) return;
         const cells=[...row.children]; const name=(cells[1]?.innerText||'').trim();
-        if (!name || name==='.') { row.style.display='none'; row.dataset.workStyled='true'; return; }
+        if (!name) { row.style.display='none'; row.dataset.workStyled='true'; return; }
         const record=projectRecords.find(x=>String(x.name||'').trim()===name) || {};
         const process=record.process_type==='턴키'?'Turnkey':(record.process_type||'');
         row.innerHTML=`<span class="work-period">${esc(record.duration||cells[5]?.innerText||'기간 미입력')}</span><span class="work-title">${esc(record.client||cells[2]?.innerText||'')} <strong>${esc(record.name||name)}</strong></span><span class="work-meta">${esc(process)}${record.location?` · ${esc(record.location)}`:''}</span>`;
