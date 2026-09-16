@@ -36,7 +36,7 @@
     const table = document.querySelector('.min-w-\\[780px\\]');
     if (table && !table.dataset.processFirst) {
       const rows = [table.firstElementChild, ...table.querySelectorAll('button.w-full')].filter(Boolean);
-      rows.forEach(row => { const cells = [...row.children]; if (cells.length >= 6) row.append(cells[5], cells[4]); });
+      rows.forEach(row => { const cells = [...row.children]; if (cells.length >= 6) row.append(cells[5], cells[4]); row.style.gridTemplateColumns='72px minmax(220px,1fr) 125px 130px 100px 160px'; });
       table.dataset.processFirst = 'true';
     }
     document.querySelectorAll('.inline-block.text-\\[11px\\].bg-\\[\\#EEF2FF\\]').forEach(el => { el.classList.remove('bg-[#EEF2FF]','text-[#1565C0]','px-2','py-0.5'); el.style.color='inherit'; el.style.background='transparent'; el.style.padding='0'; });
