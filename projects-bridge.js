@@ -5,36 +5,40 @@
   window.fetch = async (input, init) => {
     const url = typeof input === 'string' ? input : input?.url || '';
     if (url.includes('/api/trpc') && url.includes('projects.list')) {
-      const response = await originalFetch(`${SUPABASE_URL}/rest/v1/projects?select=*&order=created_at.desc&limit=100`, {
-        headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
-      });
+      const response = await originalFetch(`${SUPABASE_URL}/rest/v1/projects?select=*&order=created_at.desc&limit=100`, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } });
       const data = await response.json();
-      return new Response(JSON.stringify({ result: { data: { json: data } } }), { status: response.ok ? 200 : response.status, headers: { 'Content-Type': 'application/json' } });
+      const mapped = (data || []).map(row => ({ ...row, grade: row.duration || row.grade || '', area: row.process_type || row.area || '', project_type: row.sector || row.project_type || '' }));
+      return new Response(JSON.stringify({ result: { data: { json: mapped } } }), { status: response.ok ? 200 : response.status, headers: { 'Content-Type': 'application/json' } });
     }
     return originalFetch(input, init);
   };
   const clean = () => {
-    document.querySelectorAll('button, a').forEach(el => {
-      if (el.textContent?.trim().includes('관리자 로그인')) el.remove();
-    });
-    document.querySelectorAll('img').forEach(img => {
-      if ((img.src || '').includes('about-team')) {
-        img.style.objectFit = 'contain';
-        img.style.height = 'auto';
-        img.style.aspectRatio = 'auto';
-      }
-    });
+    document.querySelectorAll('button, a').forEach(el => { if (el.textContent?.trim().includes('관리자 로그인')) el.remove(); });
+    document.querySelectorAll('img').forEach(img => { if ((img.src || '').includes('about-team')) { img.style.objectFit = 'contain'; img.style.height = 'auto'; img.style.aspectRatio = 'auto'; } });
+    if (location.pathname.replace(/\/$/,'') !== '/projects') return;
+    const selects = [...document.querySelectorAll('select')];
+    const duration = selects[0];
+    const sector = selects[1];
+    if (duration && !duration.dataset.updated) {
+      duration.dataset.updated = 'true';
+      duration.innerHTML = '<option value="">전체 기간</option><option value="2026">2026년</option><option value="2025">2025년</option><option value="2024">2024년</option><option value="2023">2023년 이전</option>';
+      duration.previousElementSibling?.setAttribute('placeholder','기간 필터');
+    }
+    if (sector && !sector.dataset.updated) {
+      sector.dataset.updated = 'true';
+      sector.innerHTML = '<option value="">전체 섹터</option><option value="cleanroom">산업·바이오 클린룸</option><option value="dryroom">초저습 드라이룸</option><option value="cold">냉동공학 & 저온물류</option><option value="datacenter">데이터센터 액체냉각</option>';
+      const group = document.createElement('div'); group.className='project-sector-buttons';
+      [['','전체'],['cleanroom','산업·바이오 클린룸'],['dryroom','초저습 드라이룸'],['cold','냉동공학 & 저온물류'],['datacenter','데이터센터 액체냉각']].forEach(([value,label]) => { const b=document.createElement('button'); b.type='button'; b.dataset.sector=value; b.textContent=label; b.onclick=()=>{sector.value=value; sector.dispatchEvent(new Event('change',{bubbles:true})); group.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));}; group.appendChild(b); });
+      sector.style.display='none'; sector.parentElement?.appendChild(group);
+      const style=document.createElement('style'); style.textContent='.project-sector-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 20px}.project-sector-buttons button{border:1px solid #dce3eb;background:#fff;color:#526071;border-radius:999px;padding:9px 14px;font:600 11px inherit;cursor:pointer}.project-sector-buttons button.active,.project-sector-buttons button:hover{background:#1670c5;border-color:#1670c5;color:#fff}.project-sector-buttons button:first-child{background:#1670c5;color:#fff}'; document.head.appendChild(style);
+    }
+    document.querySelectorAll('th').forEach(th => { if (th.textContent.trim()==='등급') th.textContent='기간'; if (th.textContent.trim().startsWith('면적')) th.textContent='공정'; });
   };
-  new MutationObserver(clean).observe(document.documentElement, { childList: true, subtree: true });
-  setTimeout(clean, 300);
-  if (location.pathname === '/business') {
-    const script = document.createElement('script');
-    script.src = `/business-bridge.js?v=${Date.now()}`;
-    document.head.appendChild(script);
-  }
+  new MutationObserver(clean).observe(document.documentElement, { childList:true, subtree:true });
+  setTimeout(clean, 300); setTimeout(clean, 1000); setTimeout(clean, 2200);
+  if (location.pathname === '/business') { const script = document.createElement('script'); script.src = `/business-bridge.js?v=${Date.now()}`; document.head.appendChild(script); }
 })();
 
-/* Page-specific AI imagery */
 (() => {
   const path = location.pathname.replace(/\/$/,'') || '/';
   const assets = {about:'/assets/ai-cleanroom-about.jpg',business:'/assets/ai-business-engineering.jpg',projects:'/assets/ai-project-installation.jpg',contact:'/assets/ai-contact-consultation.jpg'};
