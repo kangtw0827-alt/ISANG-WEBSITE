@@ -1,5 +1,5 @@
 (() => {
-  if (location.pathname.replace(/\/$/,'') !== '/business') return;
+  if (!location.pathname.replace(/\/$/,'').startsWith('/business')) return;
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const assets=['/assets/ai-business-engineering.jpg','/assets/ai-cleanroom-hero.jpg','/assets/ai-project-installation.jpg'];
   const areas={
